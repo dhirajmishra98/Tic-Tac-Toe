@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for Multiplayer TicTacToe Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
+  },
+  "keywords": [
+    "TicTacToe",
+    "Multiplayer",
+    "Game"
+  ],
+  "author": "Dhiraj Mishra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "mongoose": "^7.2.1",
+    "nodemon": "^2.0.22",
+    "socket.io": "^2.3.0"
+  }
+}
