@@ -28,18 +28,45 @@ io.on("connection", (socket) => {
       room.players.push(player);
       room.turn = player;
       room = await room.save();
-      console.log(room);
       const roomId = room._id.toString();
       socket.join(roomId);
-      console.log(roomId);
 
       //io -> send data to everyone
       //socket -> send data to yourself only
-      io.to(roomId).emit("createRoomSuccess", room); //send this to message to everyone in room with roomId
+      io.to(roomId).emit("createRoomSuccess", room); //send this to message to everyone in room with roomId so used io here
     } catch (err) {
       console.log(err);
     }
   });
+
+  socket.on("joinRoom", async ({nickname,roomId}) => {
+    try{
+      // Regex for MongoDB ID Validation :  /^[0-9a-fA-F]{24}$/ => can be found on internet
+      if(!roomId.match(/^[0-9a-fA-F]{24}$/)){ //checking if roomid didn't match with regex from mongodb we have to return from here
+        socket.emit("errorOccurred","Please enter valid room ID");
+        return;
+      }
+      let room =await Room.findById(roomId); //goto room collection in database and find room with given room id
+      if(room.isJoin){
+        let player = {
+          nickname,
+          socketID : socket.id,
+          playerType : 'O',
+        };
+        socket.join(roomId);
+        room.players.push(player);
+        room.isJoin = false;
+        room = await room.save();
+        io.to(roomId).emit("joinRoomSuccess",room); //notify listener in socketmethods and to everyone 
+        io.to(roomId).emit("updatePlayers",room.players); //update players properties
+      }else{
+        socket.emit("errorOccurred","The game is in progress, Please try again later!");
+      }
+    } catch (err){
+      console.log(err);
+    }
+  });
+
 });
 
 mongoose
