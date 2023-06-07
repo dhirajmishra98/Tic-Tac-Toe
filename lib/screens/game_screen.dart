@@ -22,20 +22,23 @@ class _GameScreenState extends State<GameScreen> {
     super.initState();
     _socketMethods.updateRoomListener(context);
     _socketMethods.updatePlayersStateListener(context);
+    _socketMethods.pointIncreaseListener(context);
+    _socketMethods.endGameListener(context);
   }
 
   @override
   Widget build(BuildContext context) {
     RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
     return Scaffold(
-      body: roomDataProvider.roomData['isJoin'] 
+      body: roomDataProvider.roomData['isJoin']
           ? const WaitingLobby()
-          : const SafeArea(
+          : SafeArea(
               child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Scoreboard(),
-                TicTacToeBoard(),
+                const Scoreboard(),
+                const TicTacToeBoard(),
+                Text("${roomDataProvider.roomData['turn']['nickname']}'s turn"),
               ],
             )),
     );
