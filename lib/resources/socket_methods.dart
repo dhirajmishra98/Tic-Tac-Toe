@@ -61,5 +61,12 @@ class SocketMethods {
     });
   }
 
+  void updateRoomListener(BuildContext context) {
+    _socketClient.on("updateRoom", (room) {
+      Provider.of<RoomDataProvider>(context, listen: false)
+          .updataRoomData(room);
+    });
+  }
+
   //FUNCTIONS : basic functions for utilities
 }

@@ -59,6 +59,7 @@ io.on("connection", (socket) => {
         room = await room.save();
         io.to(roomId).emit("joinRoomSuccess",room); //notify listener in socketmethods and to everyone 
         io.to(roomId).emit("updatePlayers",room.players); //update players properties
+        io.to(roomId).emit("updateRoom", room);
       }else{
         socket.emit("errorOccurred","The game is in progress, Please try again later!");
       }

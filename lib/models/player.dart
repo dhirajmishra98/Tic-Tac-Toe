@@ -1,21 +1,20 @@
-
 class Player {
-  final String nickName;
-  final String socketID;
-  final double points;
-  final String playerType;
-  
+  final String? nickname;
+  final String? socketID;
+  final double? points;
+  final String? playerType;
   Player({
-    required this.nickName,
+    required this.nickname,
     required this.socketID,
     required this.points,
     required this.playerType,
   });
 
+  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'nickName': nickName,
+      'nickname': nickname,
       'socketID': socketID,
       'points': points,
       'playerType': playerType,
@@ -24,22 +23,21 @@ class Player {
 
   factory Player.fromMap(Map<String, dynamic> map) {
     return Player(
-      nickName: map['nickName'] as String,
-      socketID: map['socketID'] as String,
-      points: map['points'] as double,
-      playerType: map['playerType'] as String,
+      nickname: map['nickname'] != null ? map['nickname'] as String : null,
+      socketID: map['socketID'] != null ? map['socketID'] as String : null,
+      points: map['points'] != null ? map['points'] as double : null,
+      playerType: map['playerType'] != null ? map['playerType'] as String : null,
     );
   }
 
-
   Player copyWith({
-    String? nickName,
+    String? nickname,
     String? socketID,
     double? points,
     String? playerType,
   }) {
     return Player(
-      nickName: nickName ?? this.nickName,
+      nickname: nickname ?? this.nickname,
       socketID: socketID ?? this.socketID,
       points: points ?? this.points,
       playerType: playerType ?? this.playerType,
