@@ -3,7 +3,7 @@ import 'package:tic_tac_toe/models/player.dart';
 
 class RoomDataProvider extends ChangeNotifier {
   Map<String, dynamic> _roomData = {};
-  List<String> _displayElements = ['', '', '', '', '', '', '', '', ''];
+  final List<String> _displayElements = ['', '', '', '', '', '', '', '', ''];
   int _filledBoxes = 0;
   Player _player1 =
       Player(nickname: "", socketID: "", points: 0.0, playerType: "X");
