@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
@@ -10,8 +11,7 @@ const Room = require("./models/room");
 app.use(express.json()); //middleware : for modifying data between server and client
 
 //connecting Mongodb database and socket io
-var DB =
-  "mongodb+srv://gobindmishra22:9811266945dhiraj@tictactoecluster.hxhsoyz.mongodb.net/?retryWrites=true&w=majority"; //this key is from mongodb while connect through native drivers for cluster
+var DB = process.env.mongoUrl; //this key is from mongodb while connect through native drivers for cluster
 
 io.on("connection", (socket) => {
   console.log("connected!");
