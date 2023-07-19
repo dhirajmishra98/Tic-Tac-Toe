@@ -13,7 +13,7 @@ class SocketClient {
     //   'autoConnect': false,
     // });
     socket =
-        IO.io('https://typerracer-server.onrender.com', <String, dynamic>{
+        IO.io('will be hosted on render , thats link', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
